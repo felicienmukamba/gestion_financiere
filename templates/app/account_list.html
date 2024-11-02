@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1>Comptes</h1>
+    <a href="{% url 'account-add' %}" class="btn btn-primary mb-3">Ajouter un compte</a>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Solde initial</th>
+          <th>Solde actuel</th>
+          <th>Date de création</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for account in accounts %}
+          <tr>
+            <td>{{ account.name }}</td>
+            <td>{{ account.initial_balance }}</td>
+            <td>{{ account.current_balance }}</td>
+            <td>{{ account.created_at|date:"d/m/Y" }}</td>
+            <td>
+              <a href="{% url 'account-detail' account.pk %}" class="btn btn-info btn-sm">Voir</a>
+              <a href="{% url 'account-edit' account.pk %}" class="btn btn-warning btn-sm">Modifier</a>
+              <form action="{% url 'account-delete' account.pk %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
