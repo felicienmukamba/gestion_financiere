@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="container">
+  <div class="page-inner">
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2>Profil</h2>
+      <div class="d-flex">
+        <div>
+          {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" alt="Profile Avatar" class="img-thumbnail mb-3" style="max-width: 200px;">
+          {% else %}
+            <p>Aucun avatar téléchargé.</p>
+          {% endif %}
+        </div>
+        <div class="ml-4">
+          <p><strong>Nom d'utilisateur :</strong> {{ profile.user.username }}</p>
+          <p><strong>Email :</strong> {{ profile.email }}</p>
+          <p><strong>Numéro de téléphone :</strong> {{ profile.phone_number }}</p>
+          <p><strong>Adresse :</strong> {{ profile.address }}</p>
+          <p><strong>Date de naissance :</strong> {{ profile.date_of_birth }}</p>
+          <p><strong>Bio :</strong> {{ profile.bio }}</p>
+          <p><strong>Intitulé du poste :</strong> {{ profile.job_title }}</p>
+          <p><strong>Site Web :</strong> <a href="{{ profile.website }}">{{ profile.website }}</a></p>
+          <p><strong>Twitter :</strong> <a href="https://twitter.com/{{ profile.twitter_handle }}">{{ profile.twitter_handle }}</a></p>
+          <p><strong>LinkedIn :</strong> <a href="{{ profile.linkedin_url }}">{{ profile.linkedin_url }}</a></p>
+          <a href="{% url 'profile-edit' %}" class="btn btn-primary">Modifier le profil</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+{% endblock %}

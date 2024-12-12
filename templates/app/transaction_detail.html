@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="container">
+  <div class="page-inner">
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title">{{ transaction.date|date:"d/m/Y" }}</h1>
+      <p class="card-text"><strong>Montant:</strong> {{ transaction.amount }}</p>
+      <p class="card-text"><strong>Catégorie:</strong> {{ transaction.category.name }}</p>
+      <div class="row">
+        <div class="col-md-6">
+          <h5><i class="fas fa-file-alt"></i> Description</h5>
+          <p>{{ transaction.description }}</p>
+        </div>
+        <div class="col-md-6">
+          <h5><i class="fas fa-user"></i> Utilisateur</h5>
+          <p>{{ transaction.user.username }}</p>
+        </div>
+      </div>
+      <a href="{% url 'transaction-edit' transaction.pk %}" class="btn btn-warning btn-sm">Modifier</a>
+      <form action="{% url 'transaction-delete' transaction.pk %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+      </form>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+{% endblock %}

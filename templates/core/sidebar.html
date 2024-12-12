@@ -1,0 +1,119 @@
+{% load static %}
+
+<!-- Sidebar -->
+<div class="sidebar justify-content-center" data-background-color="dark">
+    <div class="sidebar-logo ">
+        <!-- Logo Header -->
+        <div class="logo-header mt-5 p-3" data-background-color="dark">
+            <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                        <i class="gg-menu-right"></i>
+                    </button>
+                <button class="btn btn-toggle sidenav-toggler">
+                        <i class="gg-menu-left"></i>
+                    </button>
+
+            </div>
+            <button class="topbar-toggler more">
+                    <i class="gg-more-vertical-alt"></i>
+                </button>
+        </div>
+        <!-- End Logo Header -->
+    </div>
+    <h2 class="mt-3 m-2" style="padding-left: 10px;">FINANCE SCAI</h2>
+    <div class="sidebar-wrapper scrollbar scrollbar-inner mt-1">
+        <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+            {% if user.is_authenticated %}
+
+                <li class="nav-item {% if request.resolver_match.url_name == 'dashboard' %} active{% endif%}{% if request.resolver_match.url_name == 'dashboard' %} active{% endif%} ">
+                    <a  href="{% url 'dashboard' %}">
+                    <i class="fas fa-tachometer-alt"  aria-hidden="true"></i> 
+                        <p>Tableau de bord</p> 
+                    </a>
+                </li> 
+                <li class="nav-item {% if request.resolver_match.url_name == 'category-list' %} active{% endif%}{% if request.resolver_match.url_name == 'category-list' %} active{% endif%} ">
+                    <a  href="{% url 'category-list' %}">
+                    <i class="fas fa-th-list "  aria-hidden="true"></i> 
+                        <p>Gestion Categories</p> 
+                    </a>
+                </li> 
+                <li class="nav-item {% if request.resolver_match.url_name == 'account-list' %} active{% endif%}{% if request.resolver_match.url_name == 'account-list' %} active{% endif%} ">
+                    <a  href="{% url 'account-list' %}">
+                    <i class="fas fa-wallet "  aria-hidden="true"></i> 
+                        <p>Compte Caisse</p> 
+                    </a>
+                </li> 
+                <li class="nav-item {% if request.resolver_match.url_name == 'transaction-list' %} active{% endif%}{% if request.resolver_match.url_name == 'transaction-list' %} active{% endif%} ">
+                    <a  href="{% url 'transaction-list' %}">
+                    <i class="fas fa-exchange-alt "  aria-hidden="true"></i> 
+                        <p>Depense et Recettes</p> 
+                    </a>
+                </li> 
+                <li class="nav-item {% if request.resolver_match.url_name == 'budget-list' %} active{% endif%}{% if request.resolver_match.url_name == 'budget-list' %} active{% endif%} ">
+                    <a  href="{% url 'budget-list' %}">
+                    <i class="fas fa-balance-scale"   aria-hidden="true"></i> 
+                        <p>Gestion Budgets</p> 
+                    </a>
+                </li> 
+                <!-- <li class="nav-item {% if request.resolver_match.url_name == 'section-list' %} active{% endif%}{% if request.resolver_match.url_name == 'section-list' %} active{% endif%} ">
+                    <a  href="{% url 'section-list' %}">
+                    <i class="fas"  aria-hidden="true"></i> 
+                        <p>Gestion Section</p> 
+                    </a>
+                </li> -->
+                <li class="nav-item {% if request.resolver_match.url_name == 'departement-list' %} active{% endif%}{% if request.resolver_match.url_name == 'departement-list' %} active{% endif%} ">
+                    <a  href="{% url 'departement-list' %}">
+                    <i class="fas"  aria-hidden="true"></i> 
+                        <p>Gestion departement</p> 
+                    </a>
+                </li>
+                
+                <li class="nav-item {% if request.resolver_match.url_name == 'promotion-list' %} active{% endif%}{% if request.resolver_match.url_name == 'promotion-list' %} active{% endif%} ">
+                    <a  href="{% url 'promotion-list' %}">
+                    <i class="fas"  aria-hidden="true"></i> 
+                        <p>Gestion promotion</p> 
+                    </a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'beneficiere-list' %} active{% endif%}{% if request.resolver_match.url_name == 'beneficiere-list' %} active{% endif%} ">
+                    <a  href="{% url 'beneficiere-list' %}">
+                    <i class="fas"  aria-hidden="true"></i> 
+                        <p>Gestion beneficiere</p> 
+                    </a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'etudiant-list' %} active{% endif%}{% if request.resolver_match.url_name == 'etudiant-list' %} active{% endif%} ">
+                    <a  href="{% url 'etudiant-list' %}">
+                    <i class="fas "  aria-hidden="true"></i> 
+                        <p>Gestion etudiant</p> 
+                    </a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'profile' %} active{% endif%}{% if request.resolver_match.url_name == 'profile' %} active{% endif%} ">
+                    <a  href="{% url 'profile' %}">
+                    <i class="fas  fa-user"  aria-hidden="true"></i> 
+                        <p>Gestion Profile</p> 
+                    </a>
+                </li>
+                <form id="logout-form" action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <li class="nav-item">
+                        <button class="nav-link" type="submit"><i class="fas fa-sign-out-alt"></i> Se deconnecter</button>
+                    </li>
+                </form>
+                {% else %}
+                <li class="nav-item {% if request.resolver_match.url_name == 'login' %} active{% endif%}{% if request.resolver_match.url_name == 'login' %} active{% endif%} ">
+                    <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt" aria-hidden="true"></i> Se connecter</a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'signup' %} active{% endif%}{% if request.resolver_match.url_name == 'signup' %} active{% endif%} ">
+                    <a class="nav-link" href="{% url 'signup' %}">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                        <p>Créer un compte</p>
+                    </a>
+                </li>
+                {% endif %}
+               </ul>
+           </div>
+       </div>
+   </div>
+   
+   
+   <!-- End Sidebar -->

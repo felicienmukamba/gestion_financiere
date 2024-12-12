@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="container">
+  <div class="page-inner">
+  <div class="container mt-5">
+    <h1>Gestion de depense et recette</h1>
+    <a href="{% url 'transaction-add' %}" class="btn btn-primary mb-3">Ajouter une transaction</a>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Montant</th>
+          <th>Compte</th>
+          <th>Type</th>
+          <th>Catégorie</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for transaction in transactions %}
+          <tr>
+            <td>{{ transaction.date|date:"d/m/Y" }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.account }}</td>
+            <td>{{ transaction.transaction_type }}</td>
+            <td>{{ transaction.category.name }}</td>
+            
+            <td>
+              <a href="{% url 'transaction-detail' transaction.pk %}" class="btn btn-info btn-sm">Voir</a>
+              <a href="{% url 'transaction-edit' transaction.pk %}" class="btn btn-warning btn-sm">Modifier</a>
+              <form action="{% url 'transaction-delete' transaction.pk %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+              </form>
+              {% if not transaction.transaction_type == "expense" %}
+              <a href="{% url 'bon_entree' transaction.pk %}" class="btn btn-success btn-sm">Bon d'entrée</a>
+              {% else %}
+              <a href="{% url 'bon_sortie' transaction.pk %}" class="btn btn-secondary btn-sm">Bon de sortie</a>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+{% endblock %}
