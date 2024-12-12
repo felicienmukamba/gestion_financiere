@@ -1,8 +1,11 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 {% block content %}
+
+
+<div class="container">
+  <div class="page-inner">
   <div class="container mt-5">
-    <h1>Transactions</h1>
+    <h1>Gestion de depense et recette</h1>
     <a href="{% url 'transaction-add' %}" class="btn btn-primary mb-3">Ajouter une transaction</a>
     <table class="table table-striped">
       <thead>
@@ -31,12 +34,17 @@
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
               </form>
+              {% if not transaction.transaction_type == "expense" %}
               <a href="{% url 'bon_entree' transaction.pk %}" class="btn btn-success btn-sm">Bon d'entrée</a>
+              {% else %}
               <a href="{% url 'bon_sortie' transaction.pk %}" class="btn btn-secondary btn-sm">Bon de sortie</a>
+              {% endif %}
             </td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
+  </div>
+</div>
 {% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="jumbotron text-center">
+    <h1>Bienvenue sur votre application</h1>
+  </div>
+  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-4 fw-normal text-body-emphasis">Tarification</h1>
+    <p class="fs-5 text-body-secondary">Boostez votre présence en ligne et sécurisez vos précieuses données avec notre hébergement fiable et performant. Investissez dans un avenir digital serein dès aujourd'hui!</p>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">Gratuit</h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">0$<small class="text-body-secondary fw-light">/mois</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>10 utilisateurs inclus</li>
+            <li>2 Go de stockage</li>
+            <li>Support par email</li>
+            <li>Accès au centre d'aide</li>
+          </ul>
+          <button type="button" class="w-100 btn btn-lg btn-outline-primary">Inscrivez-vous gratuitement</button>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">Pro</h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">15$<small class="text-body-secondary fw-light">/mois</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>20 utilisateurs inclus</li>
+            <li>10 Go de stockage</li>
+            <li>Support prioritaire par email</li>
+            <li>Accès au centre d'aide</li>
+          </ul>
+          <button type="button" class="w-100 btn btn-lg btn-primary">Commencer</button>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm border-primary">
+        <div class="card-header py-3 text-bg-primary border-primary">
+          <h4 class="my-0 fw-normal">Entreprise</h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">29$<small class="text-body-secondary fw-light">/mois</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>30 utilisateurs inclus</li>
+            <li>15 Go de stockage</li>
+            <li>Support téléphonique et par email</li>
+            <li>Accès au centre d'aide</li>
+          </ul>
+          <button type="button" class="w-100 btn btn-lg btn-primary">Contactez-nous</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

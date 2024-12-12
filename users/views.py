@@ -2,13 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib.auth import logout
 from users.forms import ProfileForm, SignUpForm
 
 class SignUpView(View):
     def get(self, request):
         form = SignUpForm()
-        return render(request, 'registration/signup.html', {'form': form})
+        return render(request, 'users/signup.html', {'form': form})
 
     def post(self, request):
         form = SignUpForm(request.POST)
@@ -22,7 +22,7 @@ class SignUpView(View):
             user = authenticate(username=username, password=password)
             login(request, user)
             return redirect('home')
-        return render(request, 'registration/signup.html', {'form': form})
+        return render(request, 'users/signup.html', {'form': form})
 
 
 class ProfileView(LoginRequiredMixin, View):
@@ -43,3 +43,8 @@ class ProfileUpdateView(LoginRequiredMixin, View):
             form.save()
             return redirect('profile')
         return render(request, 'app/profile_form.html', {'form': form})
+
+
+def logout_view(request):
+    logout(request) 
+    return  redirect('login')

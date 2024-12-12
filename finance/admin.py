@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Account, Transaction, Budget
+from .models import Besoin, Category, Account, EtatBesoin, Transaction, Budget
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -16,10 +16,10 @@ class AccountAdmin(admin.ModelAdmin):
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('user', 'account', 'category', 'transaction_type', 'amount', 'date', 'created_at', 'updated_at')
+    list_display = ('user', 'account', 'category', 'transaction_type', 'amount', 'created_at', 'updated_at')
     search_fields = ('user__username', 'account__name', 'category__name', 'transaction_type', 'amount')
-    list_filter = ('transaction_type', 'date', 'created_at', 'updated_at')
-    ordering = ('date',)
+    list_filter = ('transaction_type', 'created_at', 'updated_at')
+    ordering = ('created_at',)
     raw_id_fields = ('user', 'account', 'category')
 
 @admin.register(Budget)
@@ -29,3 +29,6 @@ class BudgetAdmin(admin.ModelAdmin):
     list_filter = ('start_date', 'end_date', 'created_at', 'updated_at')
     ordering = ('start_date',)
     raw_id_fields = ('user', 'account', 'category')
+
+admin.site.register(Besoin)
+admin.site.register(EtatBesoin)

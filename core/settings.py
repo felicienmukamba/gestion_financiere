@@ -26,9 +26,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
 
     "finance",
     "users",
+    "section",
 ]
 
 MIDDLEWARE = [
@@ -72,7 +74,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -95,7 +96,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -113,7 +113,8 @@ USE_TZ = True
 
 STATIC_URL = "staticfiles/"
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATIC_ROOT = 'staticfiles'
 
 MEDIA_URL = 'media/'
 

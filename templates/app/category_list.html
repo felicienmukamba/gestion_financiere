@@ -1,6 +1,9 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 {% block content %}
+
+
+<div class="container">
+  <div class="page-inner">
   <div class="container mt-5">
     <h1>Catégories</h1>
     <a href="{% url 'category-add' %}" class="btn btn-primary mb-3">Ajouter une catégorie</a>
@@ -26,4 +29,6 @@
       </tbody>
     </table>
   </div>
+  </div>
+</div>
 {% endblock %}

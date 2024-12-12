@@ -1,13 +1,22 @@
-{% extends "base.html" %}
 
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<div class="container mt-5">
-  <div class="jumbotron">
-    <h1 class="display-4">Bienvenue sur votre application!</h1>
-    <p class="lead">Ceci est la page d'accueil. Utilisez les liens de navigation pour explorer l'application.</p>
-    <hr class="my-4">
-    <p>Découvrez les différentes fonctionnalités en naviguant via le menu ci-dessus.</p>
-    <a class="btn btn-primary btn-lg" href="{% url 'dashboard' %}" role="button">Accéder au tableau de bord</a>
+
+
+<div class="container" >
+  <div class="page-inner">
+    <div class="container mt-5">
+      
+      <div class="jumbotron">
+        <h1 class="display-4">Bienvenue sur votre application!</h1>
+        <p class="lead">Ceci est la page d'accueil. Utilisez les liens de navigation pour explorer l'application.</p>
+        <hr class="my-4">
+        <p>Découvrez les différentes fonctionnalités en naviguant via le menu ci-dessus.</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'dashboard' %}" role="button">Accéder au tableau de bord</a>
+      </div>
+      <img class="w-100 mt-3" src="{% static 'assets/img/Image1.png' %}" alt="">
+    </div>
   </div>
 </div>
 {% endblock %}

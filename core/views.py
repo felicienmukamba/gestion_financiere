@@ -28,7 +28,7 @@ def generate_pdf_view(request, transaction_id, entry=True):
     response['Content-Disposition'] = 'inline; filename="bon_de_caisse.pdf"'
 
     buffer = BytesIO()
-    custom_height = 75 * mm  # Hauteur personnalisée de 148 mm
+    custom_height = 75 * mm
     p = canvas.Canvas(buffer, pagesize=(120 * mm, custom_height))  # Largeur A5, hauteur personnalisée
     width = 120 * mm
     height = custom_height
@@ -46,7 +46,7 @@ def generate_pdf_view(request, transaction_id, entry=True):
     # Informations de l'entreprise
     company_name = "SCAI ISP BUKAVU"
     company_address = "ISP BUKAVU/VAMARO/IBANDA"
-    company_phone = "+243995209133 / +243008336056"
+    company_phone = "+243995222333 / +243008336056"
     company_logo = Path(BASE_DIR) / "staticfiles/images/logo.png"  # Mettez le chemin correct du logo de l'entreprise
 
     # Informations du bon de caisse
@@ -57,6 +57,7 @@ def generate_pdf_view(request, transaction_id, entry=True):
     amount = f"Montant : {transaction.amount}"
     print_date = datetime.now().strftime("%d/%m/%Y")
     user = request.user.username
+    source = f"BENEFICIERE : {transaction.beneficiere.prenom}" if transaction.transaction_type == "sortie" else f"ETUDIANT : {transaction.source.prenom}"
 
     # Ajouter le filigrane
     p.saveState()
@@ -77,7 +78,8 @@ def generate_pdf_view(request, transaction_id, entry=True):
     p.drawString(margin_left + 50, height - 35, company_address)
     p.drawString(margin_left + 50, height - 50, company_phone)
     p.drawString(margin_left + 180, height - 20, f"Date d'impression: {print_date}")
-    p.drawString(margin_left + 180, height - 35, f"Utilisateur: {user}")
+    p.drawString(margin_left + 180, height - 35, f"Utilisateur: {user}".upper())
+    p.drawString(margin_left + 180, height - 50, f"{source}")
 
     # Titre du bon de caisse
     p.setFont('Aptos-Bold', 12)

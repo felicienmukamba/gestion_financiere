@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GESTION FINANCIERE DU DEPARTEMENT SCAI{% endblock %}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background: #343a40;
+            padding-top: 20px;
+        }
+        .sidebar .nav-link {
+            color: #fff;
+        }
+        .sidebar .nav-link:hover {
+            background: #495057;
+        }
+        .sidebar .nav-item i {
+            margin-right: 10px;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <nav class="nav flex-column">
+            <div class="logo">
+                <img src="{% static '/images/logo.png' %}" alt="Logo" class="img-fluid" style="max-width: 150px;">
+            </div>
+            <a class="nav-link" href="{% url 'home' %}"><i class="fas fa-home"></i><span class="mx-1">Home</span></a>
+            {% if user.is_authenticated %}
+                <a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a class="nav-link" href="{% url 'category-list' %}"><i class="fas fa-th-list"></i> Categories</a>
+                <a class="nav-link" href="{% url 'account-list' %}"><i class="fas fa-wallet"></i> Accounts</a>
+                <a class="nav-link" href="{% url 'transaction-list' %}"><i class="fas fa-exchange-alt"></i> Transactions</a>
+                <a class="nav-link" href="{% url 'budget-list' %}"><i class="fas fa-balance-scale"></i> Budgets</a>
+                <a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user"></i> Profile</a>
+                <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button class="btn btn-link nav-link" type="submit"><i class="fas fa-sign-out-alt"></i> Se deconnecter</button>
+                </form>
+            {% else %}
+                <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
+                <a class="nav-link" href="{% url 'signup' %}"><i class="fas fa-user-plus"></i> Créer un compte</a>
+            {% endif %}
+        </nav>
+    </div>
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">&copy; 2024 GESTION FINANCIERE DU DEPARTEMENT SCAI</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

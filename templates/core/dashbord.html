@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+  <div class="page-inner">
+    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+      <div>
+        <h3 class="fw-bold mb-3">Tableau de bord</h3>
+        <h6 class="op-7 mb-2">GESTION FINANCIERE DE LA SECTION SCAI</h6>
+      </div>
+      <div class="ms-md-auto py-2 py-md-0">
+        <p id="currentDateTime"></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="card card-stats card-round">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-icon">
+                <div class="icon-big text-center icon-primary bubble-shadow-small">
+                  <i class="fas fa-users"></i>
+                </div>
+              </div>
+              <div class="col col-stats ms-3 ms-sm-0">
+                <div class="numbers">
+                  <p class="card-category" title="personnel dans le systeme">Utilisateurs</p>
+                  <h4 class="card-title">{{users.count}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="card card-stats card-round">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-icon">
+                <div class="icon-big text-center icon-info bubble-shadow-small">
+                  <i class="fas fa-folder" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="col col-stats ms-3 ms-sm-0">
+                <div class="numbers">
+                  <p class="card-category">Dossiers</p>
+                  <h4 class="card-title">{{folders.count}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="card card-stats card-round">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-icon">
+                <div class="icon-big text-center icon-success bubble-shadow-small">
+                  <i class="fas fa-file"></i>
+                </div>
+              </div>
+              <div class="col col-stats ms-3 ms-sm-0">
+                <div class="numbers">
+                  <p class="card-category">Fichiers</p>
+                  <h4 class="card-title">{{files.count}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="card card-stats card-round">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-icon">
+                <div class="icon-big text-center icon-secondary bubble-shadow-small">
+                  <i class="fas fa-share-alt"></i>
+                </div>
+              </div>
+              <div class="col col-stats ms-3 ms-sm-0">
+                <div class="numbers">
+                  <p class="card-category">Fichiers Partagés</p>
+                  <h4 class="card-title">{{shared_files.count}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="accordion" id="dashboardAccordion">
+    <div class="card mb-3">
+      <div class="card-header" id="headingUsers">
+        <h2 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
+            <i class="fas fa-users"></i> Utilisateurs
+          </button>
+        </h2>
+      </div>
+      <div id="collapseUsers" class="collapse show" aria-labelledby="headingUsers" data-parent="#dashboardAccordion">
+        <div class="card-body">
+          <ul class="nav nav-tabs" id="usersTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="list-tab" data-toggle="tab" href="#userList" role="tab" aria-controls="userList" aria-selected="true">Liste</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="usersTabContent">
+            <div class="tab-pane fade show active" id="userList" role="tabpanel" aria-labelledby="list-tab">
+              <div class="card-body">
+                <table class="table table-hover" id="statistiques-table">
+                  <thead>
+                    <tr>
+                      <th scope="col" rowspan="2">#</th>
+                      <th scope="col" rowspan="2">email</th>
+                      <th scope="col" rowspan="2">phone number</th>
+                      <th scope="col" rowspan="2">address</th>
+                      <th scope="col" rowspan="2">date_of_birth</th>
+                      <th scope="col" rowspan="2">avatar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for profile in profiles %}
+                    <tr>
+                      <td>{{ profile.pk }}</td>
+                      <td>{{ profile.email }}</td>
+                      <td>{{ profile.phone_number }}</td>
+                      <td>{{ profile.address }}</td>
+                      <td>{{ profile.date_of_birth }}</td>
+                      <td><img src="{{ profile.avatar.url }}" alt="" width="25"></td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-header" id="headingFolders">
+        <h2 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFolders" aria-expanded="false" aria-controls="collapseFolders">
+            <i class="fas fa-folder"></i> Dossiers
+          </button>
+        </h2>
+      </div>
+      <div id="collapseFolders" class="collapse show" aria-labelledby="headingFolders" data-parent="#dashboardAccordion">
+        <div class="card-body">
+          <ul class="nav nav-tabs" id="foldersTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="list-tab" data-toggle="tab" href="#folderList" role="tab" aria-controls="folderList" aria-selected="true">Liste</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="foldersTabContent">
+            <div class="tab-pane fade show active" id="folderList" role="tabpanel" aria-labelledby="list-tab">
+              <div class="card-body">
+                <table class="table table-hover" id="statistiques-table">
+                  <thead>
+                    <tr>
+                      <th scope="col" rowspan="2">#</th>
+                      <th scope="col" rowspan="2">name</th>
+                      <th scope="col" rowspan="2">parent</th>
+                      <th scope="col" rowspan="2">Maitre</th>
+                      <th scope="col" rowspan="2">Crée par</th>
+                      <th scope="col" rowspan="2">Date creation</th>
+                      <th scope="col" rowspan="2">Dernier mis à jour</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for folder in folders %}
+                    <tr>
+                      <td>{{ folder.pk }}</td>
+                      <td>{{ folder.name }}</td>
+                      <td>{{ folder.parent }}</td>
+                      <td>{{ folder.owner }}</td>
+                      <td>{{ folder.created_by }}</td>
+                      <td>{{ folder.created_at }}</td>
+                      <td>{{ folder.updated_at }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

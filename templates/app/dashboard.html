@@ -1,5 +1,9 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block content %}
+
+
+<div class="container">
+  <div class="page-inner">
 <div class="container mt-5">
       <h1>Tableau de bord</h1>
       <!-- Statistique Cards -->
@@ -7,7 +11,7 @@
         <div class="col-sm-6 col-md-4">
           <div class="card text-white bg-primary mb-3">
             <div class="card-body">
-              <h5 class="card-title"><i class="fas fa-wallet"></i> Nombre de Comptes</h5>
+              <h5 class="card-title text-white"><i class="fas fa-wallet"></i> Nombre de Comptes</h5>
               <p class="card-text">{{ accounts|length }}</p>
             </div>
           </div>
@@ -15,7 +19,7 @@
         <div class="col-sm-6 col-md-4">
           <div class="card text-white bg-success mb-3">
             <div class="card-body">
-              <h5 class="card-title"><i class="fas fa-exchange-alt"></i> Nombre de Transactions</h5>
+              <h5 class="card-title text-white"><i class="fas fa-exchange-alt"></i> Nombre de Transactions</h5>
               <p class="card-text">{{ transactions|length }}</p>
             </div>
           </div>
@@ -23,7 +27,7 @@
         <div class="col-sm-6 col-md-4">
           <div class="card text-white bg-warning mb-3">
             <div class="card-body">
-              <h5 class="card-title"><i class="fas fa-dollar-sign"></i> Nombre de Budgets</h5>
+              <h5 class="card-title text-white"><i class="fas fa-dollar-sign"></i> Nombre de Budgets</h5>
               <p class="card-text">{{ budgets|length }}</p>
             </div>
           </div>
@@ -45,7 +49,7 @@
           <tbody>
             {% for transaction in transactions %}
               <tr>
-                <td>{{ transaction.date|date:"d/m/Y" }}</td>
+                <td>{{ transaction.created_at|date:"d/m/Y" }}</td>
                 <td>{{ transaction.amount }}</td>
                 <td>{{ transaction.category.name }}</td>
                 <td>{{ transaction.description }}</td>
@@ -83,6 +87,8 @@
       </div>
 
     </div>
+  </div>
+</div>
   </div>
 </div>
 {% endblock %}

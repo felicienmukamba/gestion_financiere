@@ -25,7 +25,7 @@ class BudgetDeleteView(LoginRequiredMixin, DeleteView):
 class DashboardView(LoginRequiredMixin, View):
     def get(self, request):
         accounts = Account.objects.filter(user=request.user)
-        transactions = Transaction.objects.filter(user=request.user).order_by('-date')[:10]
+        transactions = Transaction.objects.filter(user=request.user).order_by('-created_at')[:10]
         budgets = Budget.objects.filter(user=request.user)
         context = {
             'accounts': accounts,
@@ -142,7 +142,3 @@ class BudgetDetailView(LoginRequiredMixin, DetailView):
     model = Budget
     template_name = 'app/budget_detail.html'
     context_object_name = 'budget'
-
-
-
-
